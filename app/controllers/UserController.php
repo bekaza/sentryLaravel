@@ -19,7 +19,7 @@ class UserController extends BaseController
 	}
 
 	public function update($id){
-		
+		//return Input::all();
 		try
 		{	
 			$user = Sentry::findUserById($id);
@@ -31,26 +31,33 @@ class UserController extends BaseController
 					$resetCode = $user->getResetPasswordCode();
 					if ( !$user->attemptResetPassword($resetCode, Input::get('password')) )
 			        {
-			           $error = "Password reset failed";
+			           return $this->error("Password reset failed");		           
 			        }
-			        else
-			        {
-			            return "Password reset Success";
-			        }
-				}else{
-					return Input::only('screen_name');
 				}
 
+				$user->screen_name = Input::get('screen_name');
+			    $user->first_name = Input::get('first_name');
+			    $user->last_name = Input::get('last_name');
+			    $user->email = Input::get('email');
+
+			    // Update the user
+			    if (!$user->save())
+			    {
+			        return $this->error("User information was not updated");		
+			    }
 
 		    }else{
-		        $error = 'Password does not match.';
+		    	return $this->error('Password does not match.');	       
 		    }
-
+		    return Redirect::route('profile')->with('flash_message','User has been updated successfully !!');
 		}
 		catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
 		{
-		    $error = 'User was not found.';
-		}
-		return Redirect::back()->with('flash_message',$error);
+		   return $this->error('User was not found.');
+		}	
+	}
+
+	public function error($err){
+		return Redirect::back()->with('flash_message',$err);
 	}
 }
