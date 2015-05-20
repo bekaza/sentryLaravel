@@ -39,15 +39,16 @@
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
-		        <li class=""><a href="/myapp">Home</a></li>
-{{-- 		        <li class=""><a href="">About</a></li>
+		        <li class="{{set_active('/')}}"><a href="/myapp">Home</a></li>
+ 		    	{{--<li class=""><a href="">About</a></li>
 		        <li class=""><a href="">Contact</a></li> --}}
 		      </ul>
 
 		      <ul class="nav navbar-nav navbar-right">
 		      	@if (!Sentry::check())
-					<li class=""><a href="register">Register</a></li>
-					<li class=""><a href="{{route('login')}}">Login</a></li>
+					<li class="{{set_active('register')}}"><a href="register">Register</a></li>
+					<li class="{{set_active('login')}}"><a href="{{route('login')}}">Login</a></li>
+					<li></li>
 				@else
 					<li class=""><a href="{{route('profile')}}">My Profile</a></li>
 					<li><a href="{{route('logout')}}">Logout</a></li>

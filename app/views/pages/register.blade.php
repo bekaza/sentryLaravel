@@ -10,6 +10,7 @@
 		.thumb{
 			width: 120px;
 			height: 120px;
+			display: none;
 		}
 		.input_image-avater{
 			display: initial !important;
@@ -25,7 +26,7 @@
 		    	<h3 class="panel-title">Register</h3>
 		 	</div>
 			  	<div class="panel-body">
-			    	{{ Form::open(['route' => 'registration']) }}
+			    	{{ Form::open(['route' => 'registration','files'=>true]) }}
                     <fieldset>
 
                     	@if (Session::has('flash_message'))
@@ -36,7 +37,8 @@
 
 						<!-- Image Avater -->
 						<div class="form-group image-avater">
-							{{HTML::image(asset('/asset/img/profile.png'), null, ['id'=>'image-avater','class' => 'thumb'], null)}}
+							<p>Image Avater</p>
+							<img src="" alt="" class="thumb" id="image-avater">
 							{{Form::file('image',['class'=>'input_image-avater'])}}
 						</div>
 
@@ -69,7 +71,7 @@
 
 						<!-- E-mail field -->
 						<div class="form-group">
-							{{ Form::text('e-mail', null, ['placeholder' => 'E - mail', 'class' => 'form-control', 'required' => 'required'])}}
+							{{ Form::text('email', null, ['placeholder' => 'E - mail', 'class' => 'form-control', 'required' => 'required'])}}
 						</div>
 
 						<!-- Submit field -->
@@ -95,8 +97,10 @@
 		});
 
 		function readURL(input) {
+			$("#image-avater").hide();
 			var filename = input.split('\\').pop();
 			$("#image-avater").attr('src', path_resource + "/img/" + filename);
+			$("#image-avater").fadeIn('200');
 			console.log(path_resource + "/img/" + filename);
 		}
 	</script>
