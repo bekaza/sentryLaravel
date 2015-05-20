@@ -79,3 +79,12 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+
+/*
+|--------------------------------------------------------------------------
+| Helpers Function File
+|--------------------------------------------------------------------------
+| common Function help !!!
+| 
+*/
+require app_path().'/helpers.php';
