@@ -47,7 +47,7 @@
 		      <ul class="nav navbar-nav navbar-right">
 		      	@if (!Sentry::check())
 					<li class=""><a href="register">Register</a></li>
-					<li class=""><a href="login">Login</a></li>
+					<li class=""><a href="{{route('login')}}">Login</a></li>
 				@else
 					<li class=""><a href="{{route('profile')}}">My Profile</a></li>
 					<li><a href="{{route('logout')}}">Logout</a></li>

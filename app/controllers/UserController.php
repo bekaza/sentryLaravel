@@ -57,6 +57,7 @@ class UserController extends BaseController
 		}	
 	}
 
+	// Error function
 	public function error($err){
 		return Redirect::back()->with('flash_message',$err);
 	}
